@@ -15,6 +15,6 @@ Open Settings Mid Game -> ESC
 
 How to open the game:
 Open the Zip file
-Run the exectuable file
+Run the GolfGameExectuable file
 Type in a name
 Play the game!
