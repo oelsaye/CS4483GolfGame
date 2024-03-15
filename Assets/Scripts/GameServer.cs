@@ -26,12 +26,12 @@ public class GameServer : MonoBehaviour
 
     private int[,] allComputerScores = new int[6, 9];
 
-    private int[] levelPars = { 4, 3, 2, 6, 3, 5, 3, 2, 4 };
+    private int[] levelPars = { 20, 20, 20, 20, 20, 20, 20, 20, 20 };
     private int[] computerScores = { 0, 0, 0, 0, 0, 0 };
     private int[] totalComputerScores = { 0, 0, 0, 0, 0, 0 };
     private string[] computerNames = { "Omar", "Manakeesh", "Saif", "Cheese", "Steak", "Dog" };
 
-    private float nextMethodCount = 2f;
+    private float nextMethodCount = .5f;
     private float timeCounter = 0f;
     private int secondCounter = 0;
 
@@ -237,7 +237,9 @@ public class GameServer : MonoBehaviour
         if (inMapScreen == false)
         {
             map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.SetActive(true);
-            myPlayer.gameObject.transform.position = map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.transform.Find("Spawnpoint").gameObject.transform.position;
+            myPlayer.sphere.gameObject.transform.position = map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.transform.Find("Spawnpoint").gameObject.transform.position;
+            Debug.Log(myPlayer.sphere.gameObject.transform.position);
+            Debug.Log(map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.transform.Find("Spawnpoint").gameObject.transform.position);
         }
 
         inMapScreen = true;
@@ -247,6 +249,7 @@ public class GameServer : MonoBehaviour
 
         if (timeCounter >= nextMethodCount)
         {
+            //myPlayer.sphere.gameObject.transform.position = map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.transform.Find("Spawnpoint").gameObject.transform.position;
             mapScreenUI.SetActive(false);
             inMapScreen = false;
             timeCounter = 0f;
@@ -572,7 +575,7 @@ public class GameServer : MonoBehaviour
 
         inShowScoreboard = true;
 
-        if (timeCounter >= nextMethodCount + 10)
+        if (timeCounter >= nextMethodCount)
         {
             ScoreboardUI.SetActive(false);
             inShowScoreboard = false;
@@ -669,6 +672,7 @@ public class GameServer : MonoBehaviour
             UpdateLeaderboards();
             OpenLeaderboards();
             IntroScreen();
+            ResetValues();
             inGameOver = false;
             timeCounter = 0f;
             //If the restart button is pressed, go to RestartGame(), if the Exit button is pressed, go back to Intro Screen()
@@ -1080,6 +1084,8 @@ public class GameServer : MonoBehaviour
         inRestartGame = false;
         inGameOver = false;
 
+        map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.SetActive(false);
+
         lives = 0;
         myScore = 0;
 
@@ -1101,7 +1107,7 @@ public class GameServer : MonoBehaviour
         Escaping();
     }
 
-    private string[] itemList = { "Basic", "orange", "3", "4", "5", "6", "7", "8", "9", "10" };
+    private string[] itemList = { "Basic", "orange", "lemon", "pumpkin", "onion", "apple", "acorn", "carrot", "candy", "Golden Ball" };
     private string[] unlockedItems = { "Basic", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA" };
 
     private string selectedItem = "0";
