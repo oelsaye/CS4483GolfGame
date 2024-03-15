@@ -372,8 +372,8 @@ public class Players : MonoBehaviour
     {
         rigidB.constraints = RigidbodyConstraints.None;
         theDirection.y = 0f;
-        theDirection.x = theDirection.x * .9f;
-        theDirection.z = theDirection.z * .9f;
+        theDirection.x = theDirection.x * 1f;
+        theDirection.z = theDirection.z * 1f;
         flyDash = false;
         rigidB.AddForce((theDirection * (dashForce * theMultiplier) * sandPitDebuff));
         attempts = attempts + 1;
@@ -383,8 +383,8 @@ public class Players : MonoBehaviour
         rigidB.constraints = RigidbodyConstraints.None;
         flyDash = true;
         theDirection.y = .3f;
-        theDirection.x = theDirection.x * .3f;
-        theDirection.z = theDirection.z * .3f;
+        theDirection.x = theDirection.x * .6f;
+        theDirection.z = theDirection.z * .6f;
         rigidB.AddForce((theDirection * (dashForce * theMultiplier) * sandPitDebuff));
         attempts = attempts + 1;
     }
