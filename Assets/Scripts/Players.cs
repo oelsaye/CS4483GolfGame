@@ -306,9 +306,9 @@ public class Players : MonoBehaviour
             dashMultiply = 1.5f;
         }
 
-        if (dashForce >= 2500)
+        if (dashForce >= 1300)
         {
-            dashForce = 2500;
+            dashForce = 1300;
             maxCharge = true;
         }
 
@@ -372,8 +372,8 @@ public class Players : MonoBehaviour
     {
         rigidB.constraints = RigidbodyConstraints.None;
         theDirection.y = 0f;
-        theDirection.x = theDirection.x * .5f;
-        theDirection.z = theDirection.z * .5f;
+        theDirection.x = theDirection.x * .9f;
+        theDirection.z = theDirection.z * .9f;
         flyDash = false;
         rigidB.AddForce((theDirection * (dashForce * theMultiplier) * sandPitDebuff));
         attempts = attempts + 1;
@@ -382,7 +382,7 @@ public class Players : MonoBehaviour
     {
         rigidB.constraints = RigidbodyConstraints.None;
         flyDash = true;
-        theDirection.y = .2f;
+        theDirection.y = .3f;
         theDirection.x = theDirection.x * .3f;
         theDirection.z = theDirection.z * .3f;
         rigidB.AddForce((theDirection * (dashForce * theMultiplier) * sandPitDebuff));
