@@ -219,17 +219,17 @@
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ShapeBuilder.LastPivotLocation",
-                "value": "{\"m_Value\":1}"
+                "value": "{\"m_Value\":0}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastPivotPosition",
-                "value": "{\"m_Value\":{\"x\":0.0,\"y\":0.0,\"z\":0.0}}"
+                "value": "{\"m_Value\":{\"x\":-2.194087028503418,\"y\":-4.054737091064453,\"z\":2.3179244995117189}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize",
-                "value": "{\"m_Value\":{\"x\":-4.382105350494385,\"y\":1.1160560846328736,\"z\":-4.023421287536621}}"
+                "value": "{\"m_Value\":{\"x\":4.388174057006836,\"y\":8.109466552734375,\"z\":-4.6358489990234379}}"
             },
             {
                 "type": "UnityEngine.Quaternion, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
