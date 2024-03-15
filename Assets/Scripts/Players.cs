@@ -308,6 +308,7 @@ public class Players : MonoBehaviour
 
         if (dashForce >= 1300)
         {
+            dashMultiply = 1.7f;
             dashForce = 1300;
             maxCharge = true;
         }
@@ -372,8 +373,8 @@ public class Players : MonoBehaviour
     {
         rigidB.constraints = RigidbodyConstraints.None;
         theDirection.y = 0f;
-        theDirection.x = theDirection.x * 1f;
-        theDirection.z = theDirection.z * 1f;
+        theDirection.x = theDirection.x * 1.5f;
+        theDirection.z = theDirection.z * 1.5f;
         flyDash = false;
         rigidB.AddForce((theDirection * (dashForce * theMultiplier) * sandPitDebuff));
         attempts = attempts + 1;
