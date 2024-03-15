@@ -306,9 +306,9 @@ public class Players : MonoBehaviour
             dashMultiply = 1.5f;
         }
 
-        if (dashForce >= 1300)
+        if (dashForce >= 2500)
         {
-            dashForce = 1300;
+            dashForce = 2500;
             maxCharge = true;
         }
 
