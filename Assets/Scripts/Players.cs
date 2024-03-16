@@ -418,8 +418,6 @@ public class Players : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        hitSound.Play();
-
         if (collision.gameObject.tag == "Respawn")
         {
             Respawn();
@@ -447,6 +445,10 @@ public class Players : MonoBehaviour
             if (rigidB.velocity.y >= 1f || true)
             {
                 float speeds = (float)(lastVelocity.magnitude / 1.3);
+                float volume = Mathf.Clamp(speeds / 25, 0.3F, 1F);
+                hitSound.volume = volume;
+                Debug.Log(volume);
+                hitSound.Play();
                 var direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
                 rigidB.velocity = direction * Mathf.Max(speeds, 0f);
                 speed = 50;
