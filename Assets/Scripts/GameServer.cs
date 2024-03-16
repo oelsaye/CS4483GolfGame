@@ -53,10 +53,12 @@ public class GameServer : MonoBehaviour
     private bool escapeSettings = false;
 
     private float movementTimer = 1f;
-
+    
     // Start is called before the first frame update
+   
     void Start()
     {
+        
         inIntroScreen = true;
         myScore = 0;
         currentLevel = 1;
@@ -627,7 +629,7 @@ public class GameServer : MonoBehaviour
     private void GameEnd()
     {
         inGameEnd = true;
-
+        
         if (timeCounter >= nextMethodCount)
         {
             inGameEnd = false;

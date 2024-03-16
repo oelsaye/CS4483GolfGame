@@ -1,5 +1,7 @@
 Wild MiniGolf Challenge
 
+Sound and Music source: https://pixabay.com/
+
 Gameplay:
 In Wild Minigolf Challenge, pick your name and compete against AI golfers,
 complete a series of 9 different golf holes to take a spot on the leaderboards.
@@ -21,3 +23,5 @@ Open the build folder
 Run CS4483B.exe
 Type in a name
 Play the game!
+
+
