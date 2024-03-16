@@ -76,9 +76,10 @@ public class Players : MonoBehaviour
     public bool lockedCursor = false;
     public bool notMovable = false;
     public bool forceUnlock = false;
-
+    
     void Start()
     {
+        
         rigidB = GetComponent<Rigidbody>();
         speed = .5f;
         Cursor.visible = false;
