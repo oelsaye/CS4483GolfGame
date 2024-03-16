@@ -35,6 +35,7 @@ public class Players : MonoBehaviour
 
     [SerializeField] private GameObject hat;
     [SerializeField] private TextMeshPro name3DText;
+    [SerializeField] private AudioSource hitSound;
 
     private float speed = .5f;
     public bool lockCursor = true;
@@ -417,6 +418,7 @@ public class Players : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        hitSound.Play();
 
         if (collision.gameObject.tag == "Respawn")
         {

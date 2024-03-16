@@ -18,6 +18,7 @@ public class PlaySound : MonoBehaviour
         src.clip = background;
         src.Play();
     }
+    
     public void StopBackground(){
         src.clip = background;
         src.Stop();
