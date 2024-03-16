@@ -18,6 +18,7 @@ public class GameServer : MonoBehaviour
 
     [SerializeField] private Camera uiCam;
     [SerializeField] private GameObject course;
+    [SerializeField] private GameObject courseBGM;
 
     public float currentTime = 240;
     private int lives = 3;
@@ -253,12 +254,13 @@ public class GameServer : MonoBehaviour
         {
             map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.SetActive(true);
             myPlayer.sphere.gameObject.transform.position = map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.transform.Find("Spawnpoint").gameObject.transform.position;
-            Debug.Log(myPlayer.sphere.gameObject.transform.position);
-            Debug.Log(map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.transform.Find("Spawnpoint").gameObject.transform.position);
+            //Debug.Log(myPlayer.sphere.gameObject.transform.position);
+            //Debug.Log(map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.transform.Find("Spawnpoint").gameObject.transform.position);
         }
 
         inMapScreen = true;
-
+        
+        courseBGM.SetActive(true);
         mapScreenUI.SetActive(true);
         mapScreenUI.gameObject.transform.Find("LevelNumber").gameObject.GetComponent<TextMeshProUGUI>().text = "Course " + currentLevel.ToString();
 
