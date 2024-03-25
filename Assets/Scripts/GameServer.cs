@@ -30,12 +30,12 @@ public class GameServer : MonoBehaviour
 
     private int[,] allComputerScores = new int[6, 9];
 
-    private int[] levelPars = { 20, 20, 20, 20, 20, 20, 20, 20, 20 };
+    private int[] levelPars = { 3, 3, 2, 3, 5, 10, 16, 20, 25 };
     private int[] computerScores = { 0, 0, 0, 0, 0, 0 };
     private int[] totalComputerScores = { 0, 0, 0, 0, 0, 0 };
     private string[] computerNames = { "Omar", "Manakeesh", "Saif", "Cheese", "Steak", "Dog" };
 
-    private float nextMethodCount = .5f;
+    private float nextMethodCount = 1.5f;
     private float timeCounter = 0f;
     private int secondCounter = 0;
 
@@ -147,6 +147,11 @@ public class GameServer : MonoBehaviour
         else if (inPostRound == true)
         {
             PostRound();
+        }
+
+        else if (gettingReward == true)
+        {
+            GetReward();
         }
 
         else if (inGameEnd == true)
@@ -287,7 +292,7 @@ public class GameServer : MonoBehaviour
 
         SetCourse();
 
-        if (timeCounter >= nextMethodCount)
+        if (timeCounter >= nextMethodCount - 1f)
         {
             inMoveCamera = false;
             currentTime = 240;
@@ -637,11 +642,72 @@ public class GameServer : MonoBehaviour
                 {
                     currentLevel = currentLevel + 1;
                     GainLife();
-                    LoadingScreen();
+                    GetReward();
                 }
             }
         }
         //If on the last round, end the game, otherwise go back to Loading Screen
+    }
+
+    private bool nextLevel = false;
+    private bool exitGame = false;
+    private bool gettingReward = false;
+    [SerializeField] private GameObject rewardUI;
+
+    public void EquipItem(TMP_Text itemText)
+    {
+        EquipItem(currentLevel - 1);
+        itemText.text = "Equipped";
+    }
+
+    public void NextLevelButton(TMP_Text itemText)
+    {
+        nextLevel = true;
+        itemText.text = "Equip";
+    }
+
+    public void ExitGameButton(TMP_Text itemText)
+    {
+        exitGame = true;
+        itemText.text = "Equip";
+    }
+
+    private void CustomizeRewardItem(string itemName)
+    {
+        for (int i = 0; i < rewardUI.gameObject.transform.Find("Hats").gameObject.transform.childCount; i++)
+        {
+            rewardUI.gameObject.transform.Find("Hats").gameObject.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        rewardUI.gameObject.transform.Find("Hats").gameObject.transform.Find(itemName).gameObject.SetActive(true);
+
+    }
+
+    private void GetReward()
+    {
+        if (gettingReward == false)
+        {
+            rewardUI.SetActive(true);
+            rewardUI.gameObject.transform.Find("itemName").gameObject.GetComponent<TextMeshProUGUI>().text = unlockedItems[currentLevel - 1];
+            CustomizeRewardItem(unlockedItems[currentLevel - 1]);
+        }
+
+        gettingReward = true;
+
+        if (nextLevel == true)
+        {
+            nextLevel = false;
+            gettingReward = false;
+            rewardUI.SetActive(false);
+            LoadingScreen();
+        }
+        else if (exitGame == true)
+        {
+            exitGame = false;
+            gettingReward = false;
+            rewardUI.SetActive(false);
+            GameEnd();
+        }
     }
 
     private void GameEnd()
@@ -1172,6 +1238,15 @@ public class GameServer : MonoBehaviour
             selectedItem = itemIndex;
 
             CustomizePlayer(customizeUI.gameObject.transform.Find(itemIndex).gameObject.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text);
+        }
+    }
+
+    public void EquipItem(int itemIndex)
+    {
+        if (unlockedItems[itemIndex] != "NA")
+        {
+            selectedItem = itemIndex.ToString();
+            CustomizePlayer(unlockedItems[itemIndex]);
         }
     }
 
