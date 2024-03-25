@@ -1,5 +1,7 @@
 Wild MiniGolf Challenge
 
+Sound and Music source: https://pixabay.com/
+
 Gameplay:
 In Wild Minigolf Challenge, pick your name and compete against AI golfers,
 complete a series of 9 different golf holes to take a spot on the leaderboards.
@@ -21,3 +23,10 @@ Open the build folder
 Run CS4483B.exe
 Type in a name
 Play the game!
+
+Asset credits:
+Medieval houses -- https://assetstore.unity.com/packages/3d/environments/fantasy/low-poly-fantasy-medieval-town-lite-242322
+Trees, grass, plants -- https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-simple-nature-pack-162153
+Obstacles -- https://assetstore.unity.com/packages/templates/packs/obstacle-course-pack-178169
+	     https://assetstore.unity.com/packages/3d/props/low-poly-assets-animated-traps-obstacles-vfx-225593
+Golf putt sound -- https://elements.envato.com/golfer-putts-golf-ball-8MXU4EA?utm_source=mixkit&utm_medium=referral&utm_campaign=elements_mixkit_cs_sfx_tag&utm_content=www.google.com

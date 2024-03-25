@@ -16,6 +16,10 @@ public class GameServer : MonoBehaviour
     [SerializeField] private GameObject myCamera;
     [SerializeField] private Players myPlayer;
 
+    [SerializeField] private Camera uiCam;
+    [SerializeField] private GameObject course;
+    [SerializeField] private GameObject courseBGM;
+
     public float currentTime = 240;
     private int lives = 3;
     private int myScore = 0;
@@ -139,7 +143,7 @@ public class GameServer : MonoBehaviour
         {
             ShowScoreboard();
         }
-        
+
         else if (inPostRound == true)
         {
             PostRound();
@@ -196,6 +200,15 @@ public class GameServer : MonoBehaviour
     {
         myPlayer.notMovable = true;
         inIntroScreen = true;
+        uiCam.clearFlags = CameraClearFlags.SolidColor;
+        uiCam.cullingMask = LayerMask.GetMask("Default", "UI");
+        uiCam.orthographic = false;
+
+        course.transform.Rotate(0, 10 * Time.deltaTime, 0);
+
+        Vector3 pos = course.transform.position;
+        float newY = Mathf.Sin(Time.time * 0.5f) * 0.02f;
+        course.transform.position = new Vector3(pos.x, pos.y+newY, pos.z);
 
         if (nameInput.text != "" && nameInput.text != null)
         {
@@ -220,6 +233,9 @@ public class GameServer : MonoBehaviour
     {
         inLoadingScreen = true;
         loadingScreenUI.SetActive(true);
+        uiCam.cullingMask = LayerMask.GetMask("UI");
+        uiCam.orthographic = true;
+        uiCam.clearFlags = CameraClearFlags.Depth;
 
         if (timeCounter >= nextMethodCount)
         {
@@ -238,12 +254,13 @@ public class GameServer : MonoBehaviour
         {
             map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.SetActive(true);
             myPlayer.sphere.gameObject.transform.position = map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.transform.Find("Spawnpoint").gameObject.transform.position;
-            Debug.Log(myPlayer.sphere.gameObject.transform.position);
-            Debug.Log(map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.transform.Find("Spawnpoint").gameObject.transform.position);
+            //Debug.Log(myPlayer.sphere.gameObject.transform.position);
+            //Debug.Log(map.gameObject.transform.Find("Course" + currentLevel.ToString()).gameObject.transform.Find("Spawnpoint").gameObject.transform.position);
         }
 
         inMapScreen = true;
-
+        
+        courseBGM.SetActive(true);
         mapScreenUI.SetActive(true);
         mapScreenUI.gameObject.transform.Find("LevelNumber").gameObject.GetComponent<TextMeshProUGUI>().text = "Course " + currentLevel.ToString();
 
@@ -291,6 +308,7 @@ public class GameServer : MonoBehaviour
     {
         if (inGameCountdown == false)
         {
+            //myCamera.gameObject.SetActive(true);
             countdownTime = 3f;
             countdownUI.gameObject.transform.Find("CountdownText").gameObject.GetComponent<TextMeshProUGUI>().text = "3";
             countdownUI.gameObject.transform.Find("CountdownText").gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
@@ -321,7 +339,9 @@ public class GameServer : MonoBehaviour
             inGameCountdown = false;
             myPlayer.notMovable = false;
             timeCounter = 0f;
+
             GameInProgress();
+
         }
     }
 
@@ -446,7 +466,7 @@ public class GameServer : MonoBehaviour
 
     [SerializeField] private GameObject ScoreboardUI;
 
-    private int[] scoreOrder = { 0, 0, 0, 0, 0, 0, 0};
+    private int[] scoreOrder = { 0, 0, 0, 0, 0, 0, 0 };
     private int[] scoreOrder2 = { 0, 0, 0, 0, 0, 0, 0 };
 
     private int CalculateScores(int[] tempScore)
@@ -484,7 +504,7 @@ public class GameServer : MonoBehaviour
         }
         int highestIndex;
         int computerSpot = 6;
-        
+
         for (int i = 0; i < tempScores.Length; i++)
         {
             highestIndex = CalculateScores(tempScores);
@@ -691,7 +711,7 @@ public class GameServer : MonoBehaviour
         {
             lives = lives + 1;
         }
-    }    
+    }
 
     private void SetAIScores()
     {
@@ -739,6 +759,7 @@ public class GameServer : MonoBehaviour
             leaderboardsUI.SetActive(false);
             pickingNameUI.SetActive(false);
             HUD.SetActive(false);
+
         }
     }
 

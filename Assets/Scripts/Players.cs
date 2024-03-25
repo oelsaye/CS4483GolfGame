@@ -35,6 +35,7 @@ public class Players : MonoBehaviour
 
     [SerializeField] private GameObject hat;
     [SerializeField] private TextMeshPro name3DText;
+    [SerializeField] private AudioSource hitSound;
 
     private float speed = .5f;
     public bool lockCursor = true;
@@ -76,9 +77,10 @@ public class Players : MonoBehaviour
     public bool lockedCursor = false;
     public bool notMovable = false;
     public bool forceUnlock = false;
-
+    
     void Start()
     {
+        
         rigidB = GetComponent<Rigidbody>();
         speed = .5f;
         Cursor.visible = false;
@@ -308,6 +310,7 @@ public class Players : MonoBehaviour
 
         if (dashForce >= 1300)
         {
+            dashMultiply = 1.7f;
             dashForce = 1300;
             maxCharge = true;
         }
@@ -372,8 +375,8 @@ public class Players : MonoBehaviour
     {
         rigidB.constraints = RigidbodyConstraints.None;
         theDirection.y = 0f;
-        theDirection.x = theDirection.x * .9f;
-        theDirection.z = theDirection.z * .9f;
+        theDirection.x = theDirection.x * 1.5f;
+        theDirection.z = theDirection.z * 1.5f;
         flyDash = false;
         rigidB.AddForce((theDirection * (dashForce * theMultiplier) * sandPitDebuff));
         attempts = attempts + 1;
@@ -383,8 +386,8 @@ public class Players : MonoBehaviour
         rigidB.constraints = RigidbodyConstraints.None;
         flyDash = true;
         theDirection.y = .3f;
-        theDirection.x = theDirection.x * .3f;
-        theDirection.z = theDirection.z * .3f;
+        theDirection.x = theDirection.x * .6f;
+        theDirection.z = theDirection.z * .6f;
         rigidB.AddForce((theDirection * (dashForce * theMultiplier) * sandPitDebuff));
         attempts = attempts + 1;
     }
@@ -415,7 +418,6 @@ public class Players : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
         if (collision.gameObject.tag == "Respawn")
         {
             Respawn();
@@ -443,6 +445,10 @@ public class Players : MonoBehaviour
             if (rigidB.velocity.y >= 1f || true)
             {
                 float speeds = (float)(lastVelocity.magnitude / 1.3);
+                float volume = Mathf.Clamp(speeds / 25, 0.3F, 1F);
+                hitSound.volume = volume;
+                Debug.Log(volume);
+                hitSound.Play();
                 var direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
                 rigidB.velocity = direction * Mathf.Max(speeds, 0f);
                 speed = 50;
