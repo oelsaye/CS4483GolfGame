@@ -33,7 +33,7 @@ public class GameServer : MonoBehaviour
     private int[] levelPars = { 3, 3, 2, 3, 5, 10, 16, 20, 25 };
     private int[] computerScores = { 0, 0, 0, 0, 0, 0 };
     private int[] totalComputerScores = { 0, 0, 0, 0, 0, 0 };
-    private string[] computerNames = { "Omar", "Manakeesh", "Saif", "Cheese", "Steak", "Dog" };
+    private string[] computerNames = { "Taco", "Manakeesh", "Sushi", "Cheese", "Steak", "Falafel" };
 
     private float nextMethodCount = 1.5f;
     private float timeCounter = 0f;
@@ -703,6 +703,7 @@ public class GameServer : MonoBehaviour
         }
         else if (exitGame == true)
         {
+            lives = 0;
             exitGame = false;
             gettingReward = false;
             rewardUI.SetActive(false);
