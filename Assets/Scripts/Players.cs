@@ -385,7 +385,7 @@ public class Players : MonoBehaviour
     {
         rigidB.constraints = RigidbodyConstraints.None;
         flyDash = true;
-        theDirection.y = .3f;
+        theDirection.y = .45f;
         theDirection.x = theDirection.x * .6f;
         theDirection.z = theDirection.z * .6f;
         rigidB.AddForce((theDirection * (dashForce * theMultiplier) * sandPitDebuff));
