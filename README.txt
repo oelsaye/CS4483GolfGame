@@ -16,10 +16,7 @@ Cancel Charge -> E
 Open Settings Mid Game -> ESC
 
 How to open the game:
-Open the Build.rar file
-
-Run the GolfGameExectuable file
-Open the build folder
+Open the Golf Game Demo.zip file
 Run CS4483B.exe
 Type in a name
 Play the game!
